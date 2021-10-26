@@ -1,0 +1,59 @@
+ kubectl get svc 
+NAME                      TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+kubernetes                ClusterIP      10.96.0.1      <none>        443/TCP          2d
+mongodb-express-service   LoadBalancer   10.106.60.58   <pending>     8081:30000/TCP   37s
+mongodb-service           ClusterIP      10.111.14.59   <none>        27017/TCP        15m
+Hams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ 
+Hams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ 
+Hams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ 
+Hams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ 
+Hams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ kubectl get svc  -w
+NAME                      TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+kubernetes                ClusterIP      10.96.0.1      <none>        443/TCP          2d
+mongodb-express-service   LoadBalancer   10.106.60.58   <pending>     8081:30000/TCP   43s
+mongodb-service           ClusterIP      10.111.14.59   <none>        27017/TCP        15m
+
+
+
+^CHams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ minikube service mongodb-expresservice
+|-----------|-------------------------|-------------|---------------------------|
+| NAMESPACE |          NAME           | TARGET PORT |            URL            |
+|-----------|-------------------------|-------------|---------------------------|
+| default   | mongodb-express-service |        8081 | http://192.168.49.2:30000 |
+|-----------|-------------------------|-------------|---------------------------|
+🏃  Starting tunnel for service mongodb-express-service.
+|-----------|-------------------------|-------------|------------------------|
+| NAMESPACE |          NAME           | TARGET PORT |          URL           |
+|-----------|-------------------------|-------------|------------------------|
+| default   | mongodb-express-service |             | http://127.0.0.1:57806 |
+|-----------|-------------------------|-------------|------------------------|
+🎉  Opening service default/mongodb-express-service in default browser...
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+
+Hams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ kubectl get all 
+NAME                                              READY   STATUS    RESTARTS   AGE
+pod/mongodb-deployment-5dc6f8b7c-t6ls8            1/1     Running   0          24m
+pod/mongodb-express-deployment-78fcf796b8-j4zqv   1/1     Running   0          5m40s
+
+NAME                              TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+service/kubernetes                ClusterIP      10.96.0.1      <none>        443/TCP          2d
+service/mongodb-express-service   LoadBalancer   10.106.60.58   <pending>     8081:30000/TCP   5m40s
+service/mongodb-service           ClusterIP      10.111.14.59   <none>        27017/TCP        20m
+
+NAME                                         READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mongodb-deployment           1/1     1            1           24m
+deployment.apps/mongodb-express-deployment   1/1     1            1           5m40s
+
+NAME                                                    DESIRED   CURRENT   READY   AGE
+replicaset.apps/mongodb-deployment-5dc6f8b7c            1         1         1       24m
+replicaset.apps/mongodb-express-deployment-78fcf796b8   1         1         1       5m40s
+Hams-MacBook-Air:mongo-db-simple-webapp hamsalekhavenkatesh$ 
+
+
+
+
+
+
+
+
+
