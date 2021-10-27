@@ -54,4 +54,33 @@ spec:
           backend:
             serviceName: watch-service
             servicePort: 80
-          
+---
+ # scenario with multiple host names and each host having its own path...
+ apiVersion: networking.k8s.io/v1
+ kind: Ingress
+ metadata:
+   name: ingress-wear-watch
+ spec:
+   rules:
+   - host: "clothes.my-online-store.com" 
+     http:
+      paths:
+        - path: /wear
+          backend:
+            serviceName: wear-service
+            servicePort: 80
+        - path: /returns
+          backend:
+            serviceName: returns-service
+            servicePort: 80
+   - host: "watch.my-online-store.com" 
+     http:
+      paths:
+        - path: /stream
+          backend:
+            serviceName: live-service
+            servicePort: 80
+        - path: /podcasts
+          backend:
+            serviceName: podcasts-service
+            servicePort: 80      
