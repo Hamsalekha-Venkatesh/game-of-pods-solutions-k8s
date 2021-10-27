@@ -1,0 +1,57 @@
+# Scenario with single host name in the application.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashboard-ingress
+spec:
+  rules:
+  - host: "dashboard.com" # forward the request to dashboard servicev
+    http:
+      paths:
+      - backend:
+          service:
+            name: mongodb-express-service
+            port:
+              number: 80
+        pathType: "Prefix"
+        path: "/dashboard"
+---
+  # scenario with multiple host names...
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: ingress-wear-watch
+  spec:
+    rules:
+    - host: "wear.my-online-store.com" 
+      http:
+        paths:
+        - backend:
+          serviceName: wear-service
+          servicePort: 80
+
+    - host: "watch.my-online-store.com" 
+      http:
+        paths:
+        - backend:
+          serviceName: watch-service
+          servicePort: 80
+  ---
+  # A simple URL based routing to a service. It has a single host name but with different paths...
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: ingress-wear-watch
+  spec:
+    rules:
+      http:
+        paths:
+        - path: /wear
+          backend:
+            serviceName: wear-service
+            servicePort: 80
+        - path: /watch
+          backend:
+            serviceName: watch-service
+            servicePort: 80
+          
