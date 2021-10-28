@@ -1,3 +1,5 @@
+# Note the specs of this PC and PVC are mataching, hence this PVC will be assigned to this PV. 
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -9,3 +11,14 @@ spec:
   resources:
     requests:
       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jekyll-pv
+spec:
+  capacity:
+    storage: "1Gi"
+  accessModes: ["ReadWriteMany"]
+  hostPath:
+    path: /jekyll-site
