@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Config
+users:
+  - name: drogo
+    user:
+      client-certificate: /root/drogo.crt # cert for the webhook plugin to use
+      client-key: /root/drogo.key    # key matching the cert
+
+# kubeconfig files require a context. Provide one for the API server.
+current-context: developer
+contexts:
+- context:
+    cluster: kubernetes
+    user: drogo
+  name: developer
