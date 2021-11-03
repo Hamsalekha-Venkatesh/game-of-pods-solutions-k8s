@@ -1,0 +1,39 @@
+f:ip: {}
+f:startTime: {}
+manager: kubelet
+operation: Update
+time: "2021-11-03T13:35:39Z"
+name: nginx1401
+namespace: dev1401
+resourceVersion: "1403"
+uid: 4c7ea3c5-36b3-46f7-8890-e6471af60bc8
+spec:
+containers:
+- image: kodekloud/nginx
+imagePullPolicy: IfNotPresent
+name: nginx
+ports:
+- containerPort: 9080
+protocol: TCP
+livenessProbe:
+exec:
+command:
+- ls
+- /var/www/html/file_check
+initialDelaySeconds: 10
+periodSeconds: 60
+readinessProbe:
+failureThreshold: 3
+httpGet:
+path: /
+port: 9080
+scheme: HTTP
+periodSeconds: 10
+successThreshold: 1
+timeoutSeconds: 1
+resources: {}
+terminationMessagePath: /dev/termination-log
+terminationMessagePolicy: File
+volumeMounts:
+- mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+"nginx.yaml" 197L, 5627C                                                                                               110,11        57%
